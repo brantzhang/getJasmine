@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		//var fs = require('fs');
+		var logname = document.get
+		var url = document.URL;
+		var logname=url.substring(url.lastIndexOf("=")+1,url.length)+".log";//½ØÍ¼×Ö·û´®
+		var socket = io('/testDetail.io');
+		socket.emit('detailId',logname);
+		socket.on('detail',function(request){
+			var strs = new Array();
+			strs = request.split("#");
+			var detailTable = document.getElementById("testResultTable");
+			detailTable.rows[0].cells[1].innerText = strs[0];
+			detailTable.rows[1].cells[1].innerText = strs[1];
+			detailTable.rows[2].cells[1].innerText = strs[2];
+			detailTable.rows[3].cells[1].innerText = strs[3];
+			detailTable.rows[4].cells[1].innerText = strs[4];
+			detailTable.rows[5].cells[1].innerText = strs[5];
+			detailTable.rows[6].cells[1].innerText = strs[6];
+			detailTable.rows[7].cells[1].innerText = strs[7];
+			document.getElementsByTagName("pre")[0].innerText =strs[8];
+		});
+		
+	</script>
+  </head>
+  <body>
+  </body>
+  <h1 style="position: relative; left:3%;">Test Detail</h1>
+  <hr width="95%"></hr>
+  <div style="position: absolute; left:250px;">
+	<table border="0" id="testResultTable">
+		<tr height="30">
+			<td width="180" align=>Test Id : </td>
+			<td width="180" align=></td>
+		</tr>
+		<tr height="30" >
+			<td width="180">Device Model :  </td>
+			<td width="180"></td>
+		</tr>
+		<tr height="30" >
+			<td width="180">Device UUID : </td>
+			<td width="180"></td>
+		</tr>
+		<tr height="30" >
+			<td width="180">Device Version : </td>
+			<td width="180"></td>
+		</tr>
+		<tr height="30" >
+			<td width="180">Device Platform : </td>
+			<td width="180"></td>
+		</tr>
+		<tr height="30" >
+			<td width="180">Test Success : </td>
+			<td width="180"></td>
+		</tr>
+		<tr height="30" >
+			<td width="180">Test Fail : </td>
+			<td width="180"></td>
+		</tr>
+		<tr height="30" >
+			<td width="180">Test Time : </td>
+			<td width="180"></td>
+		</tr>
+	</table>
+	<pre>
+	</pre>
+</div>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html> 
+<head> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="/socket.io/socket.io.js"></script>
+	<script language="javascript">
+	
+		function createDetailHtml(){
+			alert("arg");
+		}
+		var socket = io('/selectspec.io');
+		socket.on('selectSpec', function(request){
+			var spec = document.getElementById("spectable");
+			spec.rows[0].cells[1].innerHTML = request;
+		});
+		socket.on('specLib',function(request){
+			var files = request;
+			/*
+			var spec = document.getElementById("spectable");
+			var newTr = spec.insertRow(2);
+			newTr.align="center";
+			newTr.height="50";
+			var newTd = newTr.insertCell(-1);
+			newTd.innerHTML='可选测试用例:';
+			*/
+			var spec = document.getElementById("spectable");
+			files.forEach(function(item) {
+				if(item!='test.js'&&item!='flag'){
+					var newTr = spec.insertRow(2);
+					newTr.align="center";
+					newTr.height="50";
+					var newTd0 = newTr.insertCell(-1);
+					var newTd1 = newTr.insertCell(-1);
+					newTd1.align="left";
+					newTd1.innerHTML= '<input type="radio" name=selectedSpec value="'+item+'"/>';
+					newTd0.innerHTML = item;
+				}
+			});
+		});
+		
+		socket.on('testResult',function(request){
+			var temp = document.getElementById("testResultTable");
+			var strs = new Array();
+			strs = request.split("#");
+			
+			var newTr = temp.insertRow(-1);
+			newTr.align="center";
+			newTr.height="30";
+			var newTd0 = newTr.insertCell(-1);
+			//newTd0.width="200";
+			newTd0.innerText = strs[0];
+			var newTd1 = newTr.insertCell(-1);
+			newTd1.innerText = strs[1];
+			var newTd2 = newTr.insertCell(-1);
+			newTd2.innerText = strs[2];
+			var newTd3 = newTr.insertCell(-1);
+			newTd3.innerText = strs[3];
+			var newTd4 = newTr.insertCell(-1);
+			newTd4.innerText = strs[4];
+			var newTd5 = newTr.insertCell(-1);
+			newTd5.innerText = strs[5];
+			var newTd6 = newTr.insertCell(-1);
+			newTd6.innerText = strs[6];
+			var newTd7 = newTr.insertCell(-1);
+			newTd7.innerText = strs[7];
+			var newTd8 = newTr.insertCell(-1);
+			newTd8.innerHTML = '<a href=http://localhost:4096/testDetail?id='+strs[0]+' target=_blank>详情</a>'
+		});
+		
+		function btnClick(){
+			var temp = document.getElementsByName("selectedSpec");
+			var flag=false;
+			for(var i=0; i<temp.length; i ++){
+				if(temp[i].checked){
+					var testcount = document.getElementById("testCount");
+					if(testcount==""){
+						testcount = 1;
+					}
+					alert(temp[i].value+":"+testcount.value);
+					socket.emit('theSpec',temp[i].value+":"+testcount.value);
+					flag = true;
+					break;
+				}
+			}
+			if(flag){
+				location.reload();
+			} else {
+				alert("Please choose one spec!");
+			}
+		}
+		
+		
+	</script>
+</head> 
+<body >
+	<div align="center">
+	<table border="0" id="spectable">
+		<tr height="30" align="center">
+			<td width="200">当前的测试用例:</td>
+			<td></td>
+		</tr>
+		<tr height="30" align="center">
+			<td width="200">可选测试用例:</td>
+		</tr>
+		<tr height="50">
+			<td>测试次数：<input type="text" id="testCount" value="1" style="height:20px;width:40px"></td>
+			<td><input type="button" name="提交" value="提交" onclick="btnClick()" style="height:30px;width:70px"></td>
+		</tr>
+	</table>
+	<hr width="80%">
+	<table border="0" id="testResultTable">
+		<tr height="30" align="center">
+			<td width="180">测试编号</td>
+			<td width="120">设备型号</td>
+			<td width="180">设备UUID</td>
+			<td width="80">运行平台</td>
+			<td width="80">平台版本</td>
+			<td width="80">成功数</td>
+			<td width="80">失败数</td>
+			<td width="180">测试时间</td>
+			<td width="80">详情</td>
+		</tr>
+	</table>
+	</div>
+</body> 
+</html> 
