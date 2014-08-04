@@ -1,0 +1,101 @@
+<!doctype html>
+<html> 
+<head> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="/socket.io/socket.io.js"></script>
+	<script language="javascript">
+		var socket = io('/selectspec.io');
+		socket.on('selectSpec', function(request){
+			var spec = document.getElementById("spectable");
+			spec.rows[0].cells[1].innerHTML = request;
+		});
+		socket.on('specLib',function(request){
+			var files = request;
+			var spec = document.getElementById("spectable");
+			files.forEach(function(item) {
+				if(item!='test.js'&&item!='flag'){
+					var newTr = spec.insertRow();
+					newTr.align="center";
+					newTr.height="50";
+					var newTd0 = newTr.insertCell();
+					var newTd1 = newTr.insertCell();
+					newTd0.align="left";
+					newTd0.innerHTML= '<input type="radio" name=selectedSpec value="'+item+'">';
+					newTd1.innerHTML = item;
+				}
+			});
+			
+			var newTr = spec.insertRow();
+			newTr.align="center";
+			newTr.height="50";
+			var newTd = newTr.insertCell();
+			newTd.innerHTML='可选测试用例:';
+			
+		});
+		
+		socket.on('testResult',function(request){
+			var temp = document.getElementById("testResultTable");
+			var strs = new Array();
+			strs = request.split(":");
+			
+			var newTr = temp.insertRow();
+			newTr.align="center";
+			newTr.height="50";
+			var newTd0 = newTr.insertCell();
+			newTd0.width="200";
+			newTd0.innerText = strs[6];
+			var newTd1 = newTr.insertCell();newTd1.width="100";
+			newTd1.innerText = strs[5];
+			var newTd2 = newTr.insertCell();newTd2.width="100";
+			newTd2.innerText = strs[4];
+			var newTd3 = newTr.insertCell();newTd3.width="100";
+			newTd3.innerText = strs[3];
+			var newTd4 = newTr.insertCell();newTd4.width="100";
+			newTd4.innerText = strs[2];
+			var newTd5 = newTr.insertCell();newTd5.width="100";
+			newTd5.innerText = strs[1];
+			var newTd6 = newTr.insertCell();newTd6.width="100";
+			newTd6.innerText = strs[0];
+		});
+		
+		function btnClick(){
+			var temp = document.getElementsByName("selectedSpec");
+			for(var i=0; i<temp.length; i ++){
+				if(temp[i].checked){
+					socket.emit('theSpec',temp[i].value);
+					break;
+				}
+			}
+			location.reload();
+		}
+	</script>
+</head> 
+<body >
+	<div align="center">
+	<table border="0" id="spectable">
+		<tr height="50" align="center">
+			<td width="200">当前的测试用例:</td>
+			<td></td>
+		</tr>
+		<tr height="50">
+			<td width="200"></td>
+			<td><input type="button" name="提交" value="提交" onclick="btnClick()"></td>
+		</tr>
+	</table>
+	<hr width=80%>
+	<table border="1">
+		<tr height="50" align="center">
+			<td width="100">设备型号</td>
+			<td width="100">UUID</td>
+			<td width="100">运行平台</td>
+			<td width="100">平台版本</td>
+			<td width="100">成功数</td>
+			<td width="100">失败数</td>
+			<td width="100">测试时间</td>
+		</tr>
+	</table>
+	<table border="1" id="testResultTable">
+	</table>
+	</div>
+</body> 
+</html> 

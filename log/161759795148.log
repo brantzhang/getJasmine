@@ -1,0 +1,24 @@
+161759795148#MI 1S#f315044e67dfc55592#Android#4.0.4#2#2#2014-8-4 16-17-59#
+
+Error: Expected 'Hello Conan' to equal 'Hello Conans'.
+    at new jasmine.ExpectationResult (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:114:32)
+    at null.toEqual (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:1235:29)
+    at null.<anonymous> (http://localhost:4096/test.js:96:21)
+    at jasmine.Block.execute (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:1064:17)
+    at jasmine.Queue.next_ (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2096:31)
+    at jasmine.Queue.start (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2049:8)
+    at jasmine.Spec.execute (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2376:14)
+    at jasmine.Queue.next_ (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2096:31)
+    at onComplete (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2092:18)
+    at jasmine.Spec.finish (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2350:5)<br> 
+Error: Expected 'Hello Conan' to equal 'Hello lllll'.
+    at new jasmine.ExpectationResult (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:114:32)
+    at null.toEqual (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:1235:29)
+    at null.<anonymous> (http://localhost:4096/test.js:101:21)
+    at jasmine.Block.execute (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:1064:17)
+    at jasmine.Queue.next_ (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2096:31)
+    at jasmine.Queue.start (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2049:8)
+    at jasmine.Spec.execute (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2376:14)
+    at jasmine.Queue.next_ (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2096:31)
+    at onComplete (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2092:18)
+    at jasmine.Spec.finish (file:///E:/workspace/testServer2/getJasmine/client/jasmine/jasmine.js:2350:5)<br> 
